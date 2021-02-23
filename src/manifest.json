@@ -1,0 +1,20 @@
+{
+    "manifest_version": 2,
+    "name": "__MSG_appName__",
+    "description": "__MSG_appDesc__",
+    "default_locale": "en",
+    "version": "1.0.0",
+    "author": "Tad Wohlrapp",
+    "icons": {  "16": "icon16.png",
+                "32": "icon32.png",
+                "48": "icon48.png",
+               "128": "icon128.png" },
+
+    "content_scripts": [
+        {
+            "matches": ["https://www.udemy.com/home/my-courses/*"],
+            "js": ["script.js"],
+            "css": ["style.css"]
+        }
+    ]
+}
