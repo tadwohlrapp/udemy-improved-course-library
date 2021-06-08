@@ -3,7 +3,7 @@
     "name": "__MSG_appName__",
     "description": "__MSG_appDesc__",
     "default_locale": "en",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "author": "Tad Wohlrapp",
     "icons": {  "16": "icon16.png",
                 "32": "icon32.png",

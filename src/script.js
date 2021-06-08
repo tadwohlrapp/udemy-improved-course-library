@@ -22,19 +22,21 @@
 
       // Add Link to course overview to options dropdown
       const courseLinkLi = document.createElement('li');
-      courseLinkLi.setAttribute('role', 'presentation');
-      courseLinkLi.classList.add('custom-course-link', 'js-removepartial');
       courseLinkLi.innerHTML = `
-        <a role="menuitem" tabindex="-1" href="https://www.udemy.com/course/${courseId}/" target="_blank" rel="noopener">
-          <span class="udi-small udi udi-explore"></span>
-          <span class="card__course-link">${i18n[lang].overview}</span>
-          <svg fill="#686f7a" width="12" height="16" viewBox="0 0 24 24" style="vertical-align: bottom;" xmlns="http://www.w3.org/2000/svg">
-            <path d="M19 19H5V5h7V3H5a2 2 0 00-2 2v14c0 1.1.9 2 2 2h14a2 2 0 002-2v-7h-2v7zM14 3v2h3.6l-9.8 9.8 1.4 1.4L19 6.4V10h2V3h-7z"></path>
-          </svg>
+        <a class="udlite-btn udlite-btn-large udlite-btn-ghost udlite-text-sm udlite-block-list-item udlite-block-list-item-small udlite-block-list-item-neutral" role="menuitem" tabindex="-1" href="https://www.udemy.com/course/${courseId}/" target="_blank" rel="noopener">
+          <span class="udi-small udi udi-explore udlite-block-list-item-icon"></span>
+          <div class="udlite-block-list-item-content card__course-link">${i18n[lang].overview}
+            <svg fill="#686f7a" width="12" height="16" viewBox="0 0 24 24" style="vertical-align: bottom; margin-left: 5px;" xmlns="http://www.w3.org/2000/svg">
+              <path d="M19 19H5V5h7V3H5a2 2 0 00-2 2v14c0 1.1.9 2 2 2h14a2 2 0 002-2v-7h-2v7zM14 3v2h3.6l-9.8 9.8 1.4 1.4L19 6.4V10h2V3h-7z"></path>
+            </svg>
+          </div>
         </a>
       `;
-      const dropdownUl = courseContainer.querySelector('.dropdown-menu');
-      dropdownUl.appendChild(courseLinkLi);
+
+      const allDropdowns = courseContainer.querySelectorAll('.udlite-block-list');
+      if (allDropdowns[1]) {
+        allDropdowns[1].appendChild(courseLinkLi);;
+      }
 
       // Find existing elements in DOM
       const thumbnailDiv = courseContainer.querySelector('.card__image');

@@ -75,6 +75,10 @@ span[class^="leave-rating--helper-text"] {
   transition: opacity linear 100ms;
 }
 
+.card__course-link {
+  font-size: 1.4rem;
+}
+
 .card__course-runtime {
   bottom: 0;
   right: 0;
