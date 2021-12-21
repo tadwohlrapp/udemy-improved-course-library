@@ -1,5 +1,6 @@
 .card--learning {
-  box-shadow: 0 0 1px 1px rgba(20, 23, 28, 0.1), 0 3px 1px 0 rgba(20, 23, 28, 0.1);
+  box-shadow: 0 0 1px 1px rgba(20, 23, 28, 0.1),
+    0 3px 1px 0 rgba(20, 23, 28, 0.1);
   transition: all 100ms linear;
 }
 
@@ -37,6 +38,7 @@ a:hover .card__image .course-image {
 .card__details {
   padding: 12px;
   height: 66px;
+  white-space: initial;
 }
 
 .impr__name {
@@ -59,7 +61,7 @@ a:hover .card__image .course-image {
   font-size: 12px;
 }
 
-span[class^="leave-rating--helper-text"] {
+span[class^='leave-rating--helper-text'] {
   font-size: 10px;
   white-space: nowrap;
 }
@@ -86,7 +88,7 @@ span[class^="leave-rating--helper-text"] {
   color: #ffffff;
 }
 
-.impr__progress-bar~.card__course-runtime {
+.impr__progress-bar ~ .card__course-runtime {
   bottom: 4px;
 }
 
@@ -126,12 +128,12 @@ span[class^="leave-rating--helper-text"] {
 }
 
 .impr__progress-bar .progress__bar {
-  background: #69c1d0 !important;
+  background: #a435ef !important;
 }
 
 .card__custom {
   font-size: 12px;
-  color: #686f7a;
+  color: #464b53;
   height: 85px;
 }
 
@@ -151,7 +153,7 @@ span[class^="leave-rating--helper-text"] {
   display: flex;
 }
 
-.impr__stats>div {
+.impr__stats > div {
   display: inline-block;
   background: #f7f8fa;
   padding: 0 5px;
@@ -232,19 +234,19 @@ span[class^="leave-rating--helper-text"] {
   justify-content: flex-end;
 }
 
-.impr__rating-btn>.impr__rating-own {
+.impr__rating-btn > .impr__rating-own {
   position: absolute;
 }
 
-.impr__rating-btn.is-rated>span {
+.impr__rating-btn.is-rated > span {
   opacity: 0;
 }
 
-.impr__rating-btn.is-rated:hover>span {
+.impr__rating-btn.is-rated:hover > span {
   opacity: 1;
 }
 
-.impr__rating-btn.is-rated:hover>.impr__rating-own {
+.impr__rating-btn.is-rated:hover > .impr__rating-own {
   opacity: 0;
 }
 
@@ -272,7 +274,7 @@ span[class^="leave-rating--helper-text"] {
   border: solid;
   border-color: #4f5662 transparent;
   border-width: 0px 4px 6px 4px;
-  content: "";
+  content: '';
   left: 50%;
   margin-left: -4px;
   bottom: -4px;
@@ -314,7 +316,7 @@ span[class^="leave-rating--helper-text"] {
 
 .impr__star--unfilled:before {
   z-index: 0;
-  content: "\F005";
+  content: '\F005';
   color: #dedfe0;
 }
 
@@ -325,7 +327,7 @@ span[class^="leave-rating--helper-text"] {
 
 .impr__star--filled:before {
   z-index: 1;
-  content: "\F005";
+  content: '\F005';
   color: #f4c150;
 }
 
