@@ -27,6 +27,6 @@ To use userscripts you need to first install a userscript manager. They come as 
 - [Tampermonkey](https://tampermonkey.net/) - Chrome, Edge, Safari, Firefox, Opera
 - [Greasemonkey](https://www.greasespot.net/) - Firefox
 
-After you have installed a userscript manager, [click here to install the userscript](https://greasyfork.org/scripts/402838-udemy-improved-course-library/code/Udemy%20-%20Improved%20Course%20Library.user.js) and visit your Udemy course library 😃
+After you have installed a userscript manager, [click here to install the userscript](https://greasyfork.org/scripts/402838/code/udemy-improved-course-library.user.js) and visit your Udemy course library 😃
 
 This userscript is also available as a WebExtension for Google Chrome, Firefox and other browsers. You can find it on the [Chrome Web Store](https://chrome.google.com/webstore/detail/udemy-improved-course-lib/dmlfcanjgejpgjajoiepgfglmjcnhhlh) and on [Firefox Add-ons](https://addons.mozilla.org/addon/udemy-improved-course-library).
