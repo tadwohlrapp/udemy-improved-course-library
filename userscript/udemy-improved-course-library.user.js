@@ -17,6 +17,7 @@
 // @run-at       document-end
 // ==/UserScript==
 
+
 fetchCourses();
 
 const mutationObserver = new MutationObserver(fetchCourses);
