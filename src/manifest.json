@@ -3,9 +3,9 @@
   "name": "__MSG_appName__",
   "description": "__MSG_appDesc__",
   "default_locale": "en",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "Tad Wohlrapp",
-  "homepage_url": "https://github.com/tadwohlrapp/udemy-improved-library-webextension",
+  "homepage_url": "https://github.com/tadwohlrapp/udemy-improved-course-library",
   "icons": {
     "16": "icon16.png",
     "32": "icon32.png",

@@ -1,14 +1,11 @@
-(function () {
-  fetchCourses();
-})();
+fetchCourses();
 
 const mutationObserver = new MutationObserver(fetchCourses);
-const targetNode = document.querySelector('div[data-module-id="my-courses-v3"]');
 const observerConfig = {
   childList: true,
   subtree: true
 };
-mutationObserver.observe(targetNode, observerConfig);
+mutationObserver.observe(document, observerConfig);
 
 const i18n = loadTranslations();
 const lang = getLang(document.documentElement.lang);
@@ -42,6 +39,7 @@ function fetchCourses() {
         </div>
       </a>
     `;
+    courseLinkLi.classList.add('js-removepartial');
 
     const allDropdowns = courseContainer.querySelectorAll('.udlite-block-list');
     if (allDropdowns[1]) {
@@ -282,7 +280,7 @@ function listenForArchiveToggle() {
         }
       });
 
-      mutationObserver.observe(targetNode, observerConfig);
+      mutationObserver.observe(document, observerConfig);
     });
   });
 }
