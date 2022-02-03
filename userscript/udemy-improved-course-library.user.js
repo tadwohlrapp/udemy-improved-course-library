@@ -6,7 +6,7 @@
 // @icon64       https://raw.githubusercontent.com/tadwohlrapp/udemy-improved-course-library/main/src/icon64.png
 // @author       Tad Wohlrapp (https://github.com/tadwohlrapp)
 // @homepageURL  https://github.com/tadwohlrapp/udemy-improved-course-library
-// @version      1.0.3
+// @version      1.0.4
 // @updateURL    https://greasyfork.org/scripts/402838/code/udemy-improved-course-library.meta.js
 // @downloadURL  https://greasyfork.org/scripts/402838/code/udemy-improved-course-library.user.js
 // @supportURL   https://github.com/tadwohlrapp/udemy-improved-course-library/issues
@@ -116,7 +116,7 @@ function fetchCourses() {
     }
 
     // If course page has draft status, do not even to fetch its data via API
-    if (courseContainer.querySelector('.card--learning__details').href.includes('/draft/')) {
+    if (courseContainer.querySelector('.card--learning__details .card__details a').href.includes('/draft/')) {
       if (!isPartialRefresh) {
         detailsBottom.parentNode.removeChild(detailsBottom);
       }
@@ -186,14 +186,14 @@ function fetchCourses() {
         // If ratings stars ARE visible, proceed to build own rating stars
         if (isShowingStars != null) {
 
-          // If I have voted, count the stars and tell me how I voted
-          ratingOwn = countAllWidths(isShowingStars.querySelectorAll('[style]')); // between 0 and 5
-
           // Find the rating-button, and remove its css class
-          ratingButton = isShowingStars.querySelector('[role="button"]');
+          ratingButton = isShowingStars.querySelector('button');
+
+          // If I have voted, count the stars and tell me how I voted
+          ratingOwn = getRatingFromSvg(ratingButton.querySelector('svg')); // between 0 and 5
 
           // Remove the old stars from ratingButton
-          ratingButton.removeChild(ratingButton.querySelector('.star-rating-shell'));
+          ratingButton.removeChild(ratingButton.querySelector('span'));
 
           // Build the html
           myRatingHtml = `
@@ -347,13 +347,9 @@ function parseRuntime(seconds, lang) {
   return hoursFormatted + minutesFormatted;
 }
 
-function countAllWidths(elements) {
-  let rating = 0;
-  for (let i = 0; i < elements.length; i++) {
-    if (!elements[i].hasAttribute('style')) return false;
-    if (elements[i].getAttribute('style') === 'width: 100%;') { rating += 1; }
-    if (elements[i].getAttribute('style') === 'width: 50%;') { rating += 0.5; }
-  }
+function getRatingFromSvg(svgElement) {
+  let percentage = svgElement.querySelector('mask rect').getAttribute('width');
+  let rating = parseFloat(percentage) / 100 * 5;
   return rating;
 }
 
