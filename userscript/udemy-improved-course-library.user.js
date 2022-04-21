@@ -404,6 +404,16 @@ function loadTranslations() {
       'decimal': ',',
       'hours': ' h',
       'mins': ' min'
+    },
+    'ja-jp': {
+      'overview': 'コースの概要',
+      'enrolled': '受講生',
+      'updated': '最終更新日 ',
+      'notavailable': 'コースの情報はありません。',
+      'separator': ',',
+      'decimal': '.',
+      'hours': '時間',
+      'mins': '分'
     }
   };
 }
