@@ -1,20 +1,30 @@
 // ==UserScript==
-// @name         Udemy - Improved Course Library
-// @description  Adds current ratings, and other detailed data to all courses in your Udemy library
-// @namespace    https://github.com/tadwohlrapp
-// @author       Tad Wohlrapp
-// @version      1.0.5
-// @license      MIT
-// @homepageURL  https://github.com/tadwohlrapp/udemy-improved-course-library
-// @supportURL   https://github.com/tadwohlrapp/udemy-improved-course-library/issues
-// @updateURL    https://greasyfork.org/scripts/402838/code/udemy-improved-course-library.meta.js
-// @downloadURL  https://greasyfork.org/scripts/402838/code/udemy-improved-course-library.user.js
-// @icon         https://raw.githubusercontent.com/tadwohlrapp/udemy-improved-course-library/main/src/icon48.png
-// @icon64       https://raw.githubusercontent.com/tadwohlrapp/udemy-improved-course-library/main/src/icon64.png
-// @run-at       document-end
-// @match        https://www.udemy.com/home/my-courses/*
-// @compatible   firefox Tested on Firefox v99 with Violentmonkey v2.13.0 and Tampermonkey v4.16
-// @compatible   chrome Tested on Chrome v100 with Violentmonkey v2.13.0 and Tampermonkey v4.16
+// @name            Udemy - Improved Course Library
+// @name:de         Udemy - Verbesserte Kursbibliothek
+// @name:fr         Udemy - Bibliothèque de cours améliorée
+// @name:es         Udemy - Biblioteca de cursos mejorada
+// @name:it         Udemy - Libreria dei corsi migliorata
+// @name:ja         Udemy - コースライブラリの改良
+// @description     Adds current ratings and other detailed data to all courses in your Udemy library.
+// @description:de  Fügt aktuelle Bewertungen und andere detaillierte Informationen zu allen Kursen in deiner Udemy-Bibliothek hinzu.
+// @description:fr  Ajoute les évaluations actuelles et d'autres données détaillées à tous les cours de ta bibliothèque Udemy.
+// @description:es  Añade valoraciones actuales y otros datos detallados a todos los cursos de tu biblioteca Udemy.
+// @description:it  Aggiunge valutazioni attuali e altri dati dettagliati a tutti i corsi nella tua libreria Udemy.
+// @description:ja  Udemyのライブラリにある全てのコースに現在の評価やその他の詳細情報を追加します。
+// @namespace       https://github.com/tadwohlrapp
+// @author          Tad Wohlrapp
+// @version         1.0.6
+// @license         MIT
+// @homepageURL     https://github.com/tadwohlrapp/udemy-improved-course-library
+// @supportURL      https://github.com/tadwohlrapp/udemy-improved-course-library/issues
+// @updateURL       https://greasyfork.org/scripts/402838/code/udemy-improved-course-library.meta.js
+// @downloadURL     https://greasyfork.org/scripts/402838/code/udemy-improved-course-library.user.js
+// @icon            https://github.com/tadwohlrapp/udemy-improved-course-library/raw/main/src/icon48.png
+// @icon64          https://github.com/tadwohlrapp/udemy-improved-course-library/raw/main/src/icon64.png
+// @run-at          document-end
+// @match           https://www.udemy.com/home/my-courses/*
+// @compatible      firefox Tested on Firefox v99 with Violentmonkey v2.13.0 and Tampermonkey v4.16
+// @compatible      chrome Tested on Chrome v100 with Violentmonkey v2.13.0 and Tampermonkey v4.16
 // ==/UserScript==
 
 fetchCourses();
