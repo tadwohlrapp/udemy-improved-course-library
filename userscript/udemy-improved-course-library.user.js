@@ -1,22 +1,21 @@
 // ==UserScript==
 // @name         Udemy - Improved Course Library
-// @namespace    https://github.com/tadwohlrapp
 // @description  Adds current ratings, and other detailed data to all courses in your Udemy library
-// @icon         https://raw.githubusercontent.com/tadwohlrapp/udemy-improved-course-library/main/src/icon48.png
-// @icon64       https://raw.githubusercontent.com/tadwohlrapp/udemy-improved-course-library/main/src/icon64.png
-// @author       Tad Wohlrapp (https://github.com/tadwohlrapp)
+// @namespace    https://github.com/tadwohlrapp
+// @author       Tad Wohlrapp
+// @version      1.0.5
+// @license      MIT
 // @homepageURL  https://github.com/tadwohlrapp/udemy-improved-course-library
-// @version      1.0.4
+// @supportURL   https://github.com/tadwohlrapp/udemy-improved-course-library/issues
 // @updateURL    https://greasyfork.org/scripts/402838/code/udemy-improved-course-library.meta.js
 // @downloadURL  https://greasyfork.org/scripts/402838/code/udemy-improved-course-library.user.js
-// @supportURL   https://github.com/tadwohlrapp/udemy-improved-course-library/issues
-// @match        https://www.udemy.com/home/my-courses/*
-// @compatible   chrome Tested with Tampermonkey v4.13 and Violentmonkey v2.13.0
-// @compatible   firefox Tested with Greasemonkey v4.11
-// @license      MIT
+// @icon         https://raw.githubusercontent.com/tadwohlrapp/udemy-improved-course-library/main/src/icon48.png
+// @icon64       https://raw.githubusercontent.com/tadwohlrapp/udemy-improved-course-library/main/src/icon64.png
 // @run-at       document-end
+// @match        https://www.udemy.com/home/my-courses/*
+// @compatible   firefox Tested on Firefox v99 with Violentmonkey v2.13.0 and Tampermonkey v4.16
+// @compatible   chrome Tested on Chrome v100 with Violentmonkey v2.13.0 and Tampermonkey v4.16
 // ==/UserScript==
-
 
 fetchCourses();
 
