@@ -1,34 +1,18 @@
-.card--learning {
-  box-shadow: 0 0 1px 1px rgba(20, 23, 28, 0.1),
-    0 3px 1px 0 rgba(20, 23, 28, 0.1);
-  transition: all 100ms linear;
+.improved-course-card--container {
+  border: 1px solid #d1d7dc;
 }
 
-.card--learning:hover {
-  box-shadow: 0 2px 8px 2px rgba(20, 23, 28, 0.15);
+.improved-course-card--container:hover {
+  background-color: #f7f9fa;
 }
 
-.card--learning:before {
-  content: none;
+.improved-course-card--image-wrapper {
+  border-width: 0;
 }
 
-.card--learning:after {
-  content: none;
-}
-
-.card__image {
-  overflow: inherit;
-}
-
-.card__image .course-image {
-  transition: opacity linear 100ms;
-  box-shadow: 0 1px 0 0 rgba(232, 233, 235, 0.5);
-  -webkit-filter: sepia(0.1) grayscale(0.1) saturate(0.8);
-  filter: sepia(0.1) grayscale(0.1) saturate(0.8);
-}
-
-a:hover .card__image .course-image {
-  opacity: 0.8;
+.improved-course-card--main-content {
+  padding: 0 6px;
+  min-height: 68px;
 }
 
 .card--learning__details {
@@ -41,24 +25,8 @@ a:hover .card__image .course-image {
   white-space: initial;
 }
 
-.impr__name {
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: -0.2px;
-  font-size: 14px;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.impr__instructor {
-  color: #73726c;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  margin-top: 4px;
-  font-size: 12px;
+.improved-course-card--course-title {
+  font-size: 1.4rem !important;
 }
 
 span[class^='leave-rating--helper-text'] {
@@ -101,19 +69,19 @@ span[class^='leave-rating--helper-text'] {
   font-weight: 600;
 }
 
-.play-button-trigger .hover-hide {
+.improved-course-card--container .hover-hide {
   opacity: 1;
 }
 
-.play-button-trigger .hover-show {
+.improved-course-card--container .hover-show {
   opacity: 0;
 }
 
-.play-button-trigger:hover .hover-hide {
+.improved-course-card--container:hover .hover-hide {
   opacity: 0;
 }
 
-.play-button-trigger:hover .hover-show {
+.improved-course-card--container:hover .hover-show {
   opacity: 1;
 }
 
@@ -131,14 +99,15 @@ span[class^='leave-rating--helper-text'] {
   background: #a435ef !important;
 }
 
-.card__custom {
+.improved-course-card--additional-details {
+  width: 100%;
   font-size: 12px;
   color: #464b53;
   height: 85px;
 }
 
 .impr__rating {
-  padding: 0 12px;
+  padding: 0 6px;
   height: 48px;
 }
 
