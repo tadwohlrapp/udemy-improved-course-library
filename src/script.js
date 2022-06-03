@@ -12,19 +12,22 @@ const lang = getLang(document.documentElement.lang);
 
 function fetchCourses() {
   listenForArchiveToggle();
-  const courseContainers = document.querySelectorAll('[data-purpose="enrolled-course-card"]:not(.details-done)');
-  if (courseContainers.length == 0) { return; }
+  const courseContainers = document.querySelectorAll('[class^="enrolled-course-card--container--"]:not(.details-done)');
+  if (courseContainers.length == 0) return;
   [...courseContainers].forEach((courseContainer) => {
 
     const isPartialRefresh = courseContainer.classList.contains('partial-refresh');
 
-    const courseId = courseContainer.querySelector('.card--learning__image').href.replace('https://www.udemy.com/course-dashboard-redirect/?course_id=', '');
+    const courseId = courseContainer.querySelector('h3[data-purpose="course-title-url"]>a').href.replace('https://www.udemy.com/course-dashboard-redirect/?course_id=', '');
 
     const courseCustomDiv = document.createElement('div');
-    courseCustomDiv.classList.add('card__custom', 'js-removepartial');
+    courseCustomDiv.classList.add('improved-course-card--additional-details', 'js-removepartial');
 
-    courseContainer.appendChild(courseCustomDiv);
+    const innerContainer = courseContainer.querySelector('div[data-purpose="container"]')
+    innerContainer.appendChild(courseCustomDiv);
+
     courseContainer.classList.add('details-done');
+    courseContainer.classList.add('improved-course-card--container');    
     courseContainer.classList.remove('partial-refresh');
 
     // Add Link to course overview to options dropdown
@@ -41,32 +44,44 @@ function fetchCourses() {
     `;
     courseLinkLi.classList.add('js-removepartial');
 
-    const allDropdowns = courseContainer.querySelectorAll('.udlite-block-list');
+    const allDropdowns = courseContainer.parentElement.querySelectorAll('.udlite-block-list');
     if (allDropdowns[1]) {
       allDropdowns[1].appendChild(courseLinkLi);;
     }
 
-    // Find existing elements in DOM
-    const thumbnailDiv = courseContainer.querySelector('.card__image');
-    const detailsName = courseContainer.querySelector('.details__name');
-    const detailsInstructor = courseContainer.querySelector('.details__instructor');
-    const progressText = courseContainer.querySelector('.progress__text');
-    const progressBar = courseContainer.querySelector('.details__progress');
-    const startCourseText = courseContainer.querySelector('.details__start-course');
-    const detailsBottom = courseContainer.querySelector('.details__bottom');
+// Find existing elements in DOM
+const imageWrapper = courseContainer.querySelector('div[class^="course-card--image-wrapper--"]');
+imageWrapper.classList.add('improved-course-card--image-wrapper')
+
+const mainContent = courseContainer.querySelector('div[class^="course-card--main-content--"]');
+mainContent.classList.add('improved-course-card--main-content')
+
+const courseTitle = courseContainer.querySelector('h3[data-purpose="course-title-url"]');
+courseTitle.classList.add('improved-course-card--course-title');
+
+const progressBar = courseContainer.querySelector('div[class^="enrolled-course-card--meter--"]');
+progressBar?.classList.add('improved-course-card--meter')
+
+const progressAndRating = courseContainer.querySelector('div[class*="enrolled-course-card--progress-and-rating--"]');
+progressAndRating?.classList.add('improved-course-card--progress-and-rating')
+
+const progressText = progressAndRating.firstChild;
+const progressMade = /%/.test(progressText.textContent);
+
+if (!progressMade) progressAndRating.parentNode.removeChild(progressAndRating);
 
     // If progress made
-    if (progressText != null) {
+    if (progressMade) {
       // Add progress bar below thumbnail
       const progressBarSpan = document.createElement('span');
       progressBarSpan.classList.add('impr__progress-bar', 'js-removepartial');
       progressBarSpan.innerHTML = progressBar.innerHTML;
-      thumbnailDiv.appendChild(progressBarSpan);
+      imageWrapper.appendChild(progressBarSpan);
       // Add progress percentage to thumbnail bottom right
       const progressTextSpan = document.createElement('span');
       progressTextSpan.classList.add('card__thumb-overlay', 'card__course-runtime', 'hover-show', 'js-removepartial');
-      progressTextSpan.innerHTML = progressText.innerHTML;
-      thumbnailDiv.appendChild(progressTextSpan);
+      progressTextSpan.textContent = progressText.textContent;
+      imageWrapper.appendChild(progressTextSpan);
       // Remove existing progress percentage
       progressText.parentNode.removeChild(progressText);
     }
@@ -76,30 +91,11 @@ function fetchCourses() {
       progressBar.parentNode.removeChild(progressBar);
     }
 
-    // If "START COURSE" exists, remove it. It's clutter
-    if (startCourseText != null) {
-      startCourseText.parentNode.removeChild(startCourseText);
-    }
-
-    if (!isPartialRefresh) {
-      // If instructor title exists, remove it as well
-      const instructorTitle = detailsInstructor.querySelector('span');
-      if (instructorTitle != null) {
-        instructorTitle.parentNode.removeChild(instructorTitle);
-      }
-
-      // Switch classes on course name and instructor
-      detailsName.classList.add('impr__name');
-      detailsName.classList.remove('details__name');
-      detailsInstructor.classList.add('impr__instructor');
-      detailsInstructor.classList.remove('details__instructor');
-    }
-
     // If course page has draft status, do not even to fetch its data via API
-    if (courseContainer.querySelector('.card--learning__details .card__details a').href.includes('/draft/')) {
-      if (!isPartialRefresh) {
-        detailsBottom.parentNode.removeChild(detailsBottom);
-      }
+    if (courseContainer.querySelector('[data-purpose="course-title-url"] a').href.includes('/draft/')) {
+      // if (!isPartialRefresh) {
+      //   mainContent.parentNode.removeChild(mainContent);
+      // }
       courseContainer.querySelector('.card__course-link').style.textDecoration = "line-through";
       courseCustomDiv.classList.add('card__nodata');
       courseCustomDiv.innerHTML += i18n[lang].notavailable;
@@ -154,7 +150,7 @@ function fetchCourses() {
         }
 
         // Returns true or false depending if stars are visible
-        const isShowingStars = courseContainer.querySelector('.details__bottom--review');
+        const reviewButton = courseContainer.querySelector('[data-purpose="review-button"]');
 
         // Now let's handle own ratings
 
@@ -164,10 +160,10 @@ function fetchCourses() {
         let ratingOwn = 0;
 
         // If ratings stars ARE visible, proceed to build own rating stars
-        if (isShowingStars != null) {
+        if (reviewButton != null) {
 
           // Find the rating-button, and remove its css class
-          ratingButton = isShowingStars.querySelector('button');
+          ratingButton = reviewButton;
 
           // If I have voted, count the stars and tell me how I voted
           ratingOwn = getRatingFromSvg(ratingButton.querySelector('svg')); // between 0 and 5
@@ -223,64 +219,72 @@ function fetchCourses() {
           </div>
         `;
 
-        if (isShowingStars != null) {
+        if (reviewButton != null) {
           const reviewButtonContainer = courseCustomDiv.querySelector('.review-button');
           ratingButton.style.display = 'inline';
           reviewButtonContainer.appendChild(ratingButton);
         }
 
-        if (!isPartialRefresh) {
-          detailsBottom.parentNode.removeChild(detailsBottom);
-        }
+        // if (!isPartialRefresh) {
+        //   mainContent.parentNode.removeChild(mainContent);
+        // }
 
         // Hide language badge if language is English
         if (localeCode.slice(0, 2) !== 'en') {
           const localeSpan = document.createElement('span');
           localeSpan.classList.add('card__thumb-overlay', 'card__course-locale', 'hover-hide', 'js-removepartial');
           localeSpan.innerHTML = `<span style="margin-right: 3px;vertical-align: bottom;font-size: 14px;line-height: 13px;">${getFlagEmoji(localeCode.slice(-2))}</span>${locale}`;
-          thumbnailDiv.appendChild(localeSpan);
+          imageWrapper.appendChild(localeSpan);
         }
 
         // Add course runtime from API to thumbnail bottom right
         const runtimeSpan = document.createElement('span');
         runtimeSpan.classList.add('card__thumb-overlay', 'card__course-runtime', 'hover-hide', 'js-removepartial');
         runtimeSpan.innerHTML = parseRuntime(runtime, lang);
-        thumbnailDiv.appendChild(runtimeSpan);
+        imageWrapper.appendChild(runtimeSpan);
       })
       .catch(error => {
         courseCustomDiv.classList.add('card__nodata');
         courseCustomDiv.innerHTML += `<div><b>${error}</b><br>${i18n[lang].notavailable}</div>`;
-        if (detailsBottom != null) {
-          detailsBottom.parentNode.removeChild(detailsBottom);
-        }
+        // if (mainContent != null) {
+        //   mainContent.parentNode.removeChild(mainContent);
+        // }
       });
   });
 }
 
 function listenForArchiveToggle() {
+
   document.querySelectorAll('[data-purpose="toggle-archived"]').forEach(item => {
     item.addEventListener('click', event => {
-      mutationObserver.disconnect();
-      let thisCourse = item.closest('.details-done');
-      if (thisCourse != null) {
-        thisCourse.classList.add('partial-refresh');
 
-        while (thisCourse.nextElementSibling != null) {
-          thisCourse.nextElementSibling.classList.add('partial-refresh');
-          thisCourse = thisCourse.nextElementSibling;
-        }
-      }
+      // super super dirty quickfix for broken archiving. I am sorry
+      setTimeout(() => {
+        location.reload();
+      }, 500)
 
-      const brokenContainers = document.querySelectorAll('.partial-refresh');
-      [...brokenContainers].forEach((brokenContainer) => {
-        brokenContainer.classList.remove('details-done');
-        let removeElements = brokenContainer.getElementsByClassName('js-removepartial');
-        while (removeElements[0]) {
-          removeElements[0].parentNode.removeChild(removeElements[0]);
-        }
-      });
 
-      mutationObserver.observe(document, observerConfig);
+      // mutationObserver.disconnect();
+      // let thisCourse = item.closest('.details-done');
+      // if (thisCourse != null) {
+      //   thisCourse.classList.add('partial-refresh');
+
+      //   while (thisCourse.nextElementSibling != null) {
+      //     thisCourse.nextElementSibling.classList.add('partial-refresh');
+      //     thisCourse = thisCourse.nextElementSibling;
+      //   }
+      // }
+
+      // const brokenContainers = document.querySelectorAll('.partial-refresh');
+      // [...brokenContainers].forEach((brokenContainer) => {
+      //   brokenContainer.classList.remove('details-done');
+      //   let removeElements = brokenContainer.getElementsByClassName('js-removepartial');
+      //   while (removeElements[0]) {
+      //     removeElements[0].parentNode.removeChild(removeElements[0]);
+      //   }
+      // });
+
+      // mutationObserver.observe(document, observerConfig);
     });
   });
 }
