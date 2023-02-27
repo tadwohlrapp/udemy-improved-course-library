@@ -13,7 +13,7 @@
 // @description:ja  Udemyのライブラリにある全てのコースに現在の評価やその他の詳細情報を追加します。
 // @namespace       https://github.com/tadwohlrapp
 // @author          Tad Wohlrapp
-// @version         1.0.7
+// @version         1.0.8
 // @license         MIT
 // @homepageURL     https://github.com/tadwohlrapp/udemy-improved-course-library
 // @supportURL      https://github.com/tadwohlrapp/udemy-improved-course-library/issues
@@ -23,8 +23,8 @@
 // @icon64          https://github.com/tadwohlrapp/udemy-improved-course-library/raw/main/src/icon64.png
 // @run-at          document-end
 // @match           https://www.udemy.com/home/my-courses/*
-// @compatible      firefox Tested on Firefox v99 with Violentmonkey v2.13.0 and Tampermonkey v4.16
-// @compatible      chrome Tested on Chrome v100 with Violentmonkey v2.13.0 and Tampermonkey v4.16
+// @compatible      firefox Tested on Firefox v110.0 with Violentmonkey v2.13.11 and Tampermonkey v4.18.1
+// @compatible      chrome Tested on Chrome v110.0 with Violentmonkey v2.14.0 and Tampermonkey v4.18.1
 // ==/UserScript==
 
 fetchCourses();
