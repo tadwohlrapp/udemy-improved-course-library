@@ -100,7 +100,7 @@ function fetchCourses() {
       return;
     }
 
-    const fetchUrl = 'https://www.udemy.com/api-2.0/courses/' + courseId + '?fields[course]=rating,num_reviews,num_subscribers,content_length_video,last_update_date,locale,has_closed_caption,caption_languages,num_published_lectures';
+    const fetchUrl = 'https://www.udemy.com/api-2.0/courses/' + courseId + '?fields[course]=rating,num_reviews,num_subscribers,content_length_video,last_update_date,created,locale,has_closed_caption,caption_languages,num_published_lectures';
     fetch(fetchUrl)
       .then(response => {
         if (response.ok) {
@@ -117,19 +117,15 @@ function fetchCourses() {
         const reviews = json.num_reviews;
         const enrolled = json.num_subscribers;
         const runtime = json.content_length_video;
-        const updateDate = json.last_update_date;
+        const date = json.last_update_date ?? json.created.slice(0, 10); // 'created' comes as full iso string with time
         const locale = json.locale.title;
         const localeCode = json.locale.locale;
         const hasCaptions = json.has_closed_caption;
         const captionsLangs = json.caption_languages;
 
-        // Format "Last updated" Date
-        let updateDateShort = '';
-        let updateDateLong = '';
-        if (updateDate) {
-          updateDateShort = updateDate.replace(/(\d{4})-(\d{2})-(\d{2})/, '$2\/$1');
-          updateDateLong = new Date(updateDate).toLocaleDateString(lang, { year: 'numeric', month: 'long', day: 'numeric' });
-        }
+        // Format "Last updated / Created" Dates
+        const updateDateShort = date ? date.replace(/(\d{4})-(\d{2})-(\d{2})/, '$2\/$1') : '';
+        const updateDateLong = date ? new Date(date).toLocaleDateString(lang, { year: 'numeric', month: 'long', day: 'numeric' }) : '';
 
         // Small helper for rating strip color
         const getColor = v => `hsl(${(Math.round((1 - v) * 120))},100%,45%)`;
