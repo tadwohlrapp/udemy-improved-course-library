@@ -56,7 +56,7 @@ function fetchCourses() {
     innerContainer.appendChild(courseCustomDiv);
 
     courseContainer.classList.add('details-done');
-    courseContainer.classList.add('improved-course-card--container');    
+    courseContainer.classList.add('improved-course-card--container');
     courseContainer.classList.remove('partial-refresh');
 
     // Add Link to course overview to options dropdown
@@ -78,26 +78,26 @@ function fetchCourses() {
       allDropdowns[1].appendChild(courseLinkLi);;
     }
 
-// Find existing elements in DOM
-const imageWrapper = courseContainer.querySelector('div[class^="course-card--image-wrapper--"]');
-imageWrapper.classList.add('improved-course-card--image-wrapper')
+    // Find existing elements in DOM
+    const imageWrapper = courseContainer.querySelector('div[class^="course-card--image-wrapper--"]');
+    imageWrapper.classList.add('improved-course-card--image-wrapper')
 
-const mainContent = courseContainer.querySelector('div[class^="course-card--main-content--"]');
-mainContent.classList.add('improved-course-card--main-content')
+    const mainContent = courseContainer.querySelector('div[class^="course-card--main-content--"]');
+    mainContent.classList.add('improved-course-card--main-content')
 
-const courseTitle = courseContainer.querySelector('h3[data-purpose="course-title-url"]');
-courseTitle.classList.add('improved-course-card--course-title');
+    const courseTitle = courseContainer.querySelector('h3[data-purpose="course-title-url"]');
+    courseTitle.classList.add('improved-course-card--course-title');
 
-const progressBar = courseContainer.querySelector('div[class^="enrolled-course-card--meter--"]');
-progressBar?.classList.add('improved-course-card--meter')
+    const progressBar = courseContainer.querySelector('div[class^="enrolled-course-card--meter--"]');
+    progressBar?.classList.add('improved-course-card--meter')
 
-const progressAndRating = courseContainer.querySelector('div[class*="enrolled-course-card--progress-and-rating--"]');
-progressAndRating?.classList.add('improved-course-card--progress-and-rating')
+    const progressAndRating = courseContainer.querySelector('div[class*="enrolled-course-card--progress-and-rating--"]');
+    progressAndRating?.classList.add('improved-course-card--progress-and-rating')
 
-const progressText = progressAndRating.firstChild;
-const progressMade = /%/.test(progressText.textContent);
+    const progressText = progressAndRating.firstChild;
+    const progressMade = /%/.test(progressText.textContent);
 
-if (!progressMade) progressAndRating.parentNode.removeChild(progressAndRating);
+    if (!progressMade) progressAndRating.parentNode.removeChild(progressAndRating);
 
     // If progress made
     if (progressMade) {
@@ -122,9 +122,6 @@ if (!progressMade) progressAndRating.parentNode.removeChild(progressAndRating);
 
     // If course page has draft status, do not even to fetch its data via API
     if (courseContainer.querySelector('[data-purpose="course-title-url"] a').href.includes('/draft/')) {
-      // if (!isPartialRefresh) {
-      //   mainContent.parentNode.removeChild(mainContent);
-      // }
       courseContainer.querySelector('.card__course-link').style.textDecoration = "line-through";
       courseCustomDiv.classList.add('card__nodata');
       courseCustomDiv.innerHTML += i18n[lang].notavailable;
@@ -172,8 +169,10 @@ if (!progressMade) progressAndRating.parentNode.removeChild(progressAndRating);
         if (hasCaptions) {
           const captionsString = captionsLangs.join('&#013;&#010;');
           captionsTag = `
-            <div class="impr__tooltip" data-tooltip="${captionsString}">
-              <i class="udi udi-closed-caption"></i>
+            <div class="impr__badge" data-tooltip="${captionsString}">
+              <svg aria-hidden="true" focusable="false" class="ud-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M21 4H3v16h18V4zm-10 7H9.5v-.5h-2v3h2V13H11v2H6V9h5v2zm7 0h-1.5v-.5h-2v3h2V13H18v2h-5V9h5v2z"/>
+              </svg>
             </div>
           `;
         }
@@ -202,15 +201,14 @@ if (!progressMade) progressAndRating.parentNode.removeChild(progressAndRating);
 
           // Build the html
           myRatingHtml = `
-            <span class="impr__stars-ct">
-              <span class="impr__stars">
-                ${buildStars(ratingOwn)}
+            <div class="impr__rating-row">
+              <span class="impr__star-wrapper">
+                <span class="ud-sr-only">Rating: ${ratingOwn} out of 5</span>
+                ${buildSvgStars(courseId.toString() + '-own', ratingOwn)}
+                <span class="ud-heading-sm impr__rating-number">${setDecimal(ratingOwn, lang)}</span>
               </span>
-              <span class="impr__review">
-                <span class="impr__review-stat">${setDecimal(ratingOwn, lang)}</span>
-                <span class="impr__review-count">(<span class="review-button"></span>)</span>
-              </span>
-            </span>
+              <span class="ud-text-xs impr__rating-count">(<span class="review-button"></span>)</span>
+            </div>
           `;
         }
 
@@ -219,29 +217,32 @@ if (!progressMade) progressAndRating.parentNode.removeChild(progressAndRating);
         let updateDateInfo = '';
         if (updateDateShort !== '' && updateDateLong !== '') {
           updateDateInfo = `
-            <div class="impr__tooltip" data-tooltip="${i18n[lang].updated}${updateDateLong}">
-              <i class="udi udi-resend"></i><span>${updateDateShort}</span>
+            <div class="impr__badge" data-tooltip="${i18n[lang].updated}${updateDateLong}">
+              <svg aria-hidden="true" focusable="false" class="ud-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M11 8v5l4.3 2.5.7-1.3-3.5-2V8H11zm10 2V3l-2.6 2.6A9 9 0 1 0 21 12h-2a7 7 0 1 1-2-5l-3 3h7z"/>
+              </svg><span>${updateDateShort}</span>
             </div>
           `;
         }
 
         courseCustomDiv.innerHTML = `
           <div class="impr__rating">
-            <span class="impr__stars-ct">
-              <span class="impr__stars">
-                ${buildStars(rating)}
+            <div class="impr__rating-row">
+              <span class="impr__star-wrapper">
+                <span class="ud-sr-only">Rating: ${rating} out of 5</span>
+                ${buildSvgStars(courseId, rating)}
+                <span class="ud-heading-sm impr__rating-number">${setDecimal(rating, lang)}</span>
               </span>
-              <span class="impr__review">
-                <span class="impr__review-stat">${setDecimal(rating, lang)}</span>
-                <span class="impr__review-count">(${setSeparator(reviews, lang)})</span>
-              </span>
-            </span>
+              <span class="ud-text-xs impr__rating-count">(${setSeparator(reviews, lang)})</span>
+            </div>
             ${myRatingHtml}
           </div>
           <div class="impr__rating-strip" style="background-color:${getColor(colorValue(ratingStripColor))}"></div>
           <div class="impr__stats">
-            <div class="impr__tooltip" data-tooltip="${setSeparator(enrolled, lang)} ${i18n[lang].enrolled}">
-              <i class="udi udi-users"></i><span>${setSeparator(enrolled, lang)}</span>
+            <div class="impr__badge" data-tooltip="${setSeparator(enrolled, lang)} ${i18n[lang].enrolled}">
+              <svg aria-hidden="true" focusable="false" class="ud-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M16 11c1.7 0 3-1.3 3-3s-1.3-3-3-3-3 1.3-3 3 1.3 3 3 3zm-8 0c1.7 0 3-1.3 3-3S9.7 5 8 5 5 6.3 5 8s1.3 3 3 3zm0 2c-2.3 0-7 1.2-7 3.5V19h14v-2.5c0-2.3-4.7-3.5-7-3.5zm8 0h-1c1.2.9 2 2 2 3.5V19h6v-2.5c0-2.3-4.7-3.5-7-3.5z"/>
+              </svg><span>${setSeparator(enrolled, lang)}</span>
             </div>
             ${updateDateInfo}
             ${captionsTag}
@@ -253,10 +254,6 @@ if (!progressMade) progressAndRating.parentNode.removeChild(progressAndRating);
           ratingButton.style.display = 'inline';
           reviewButtonContainer.appendChild(ratingButton);
         }
-
-        // if (!isPartialRefresh) {
-        //   mainContent.parentNode.removeChild(mainContent);
-        // }
 
         // Hide language badge if language is English
         if (localeCode.slice(0, 2) !== 'en') {
@@ -275,9 +272,6 @@ if (!progressMade) progressAndRating.parentNode.removeChild(progressAndRating);
       .catch(error => {
         courseCustomDiv.classList.add('card__nodata');
         courseCustomDiv.innerHTML += `<div><b>${error}</b><br>${i18n[lang].notavailable}</div>`;
-        // if (mainContent != null) {
-        //   mainContent.parentNode.removeChild(mainContent);
-        // }
       });
   });
 }
@@ -292,28 +286,6 @@ function listenForArchiveToggle() {
         location.reload();
       }, 500)
 
-
-      // mutationObserver.disconnect();
-      // let thisCourse = item.closest('.details-done');
-      // if (thisCourse != null) {
-      //   thisCourse.classList.add('partial-refresh');
-
-      //   while (thisCourse.nextElementSibling != null) {
-      //     thisCourse.nextElementSibling.classList.add('partial-refresh');
-      //     thisCourse = thisCourse.nextElementSibling;
-      //   }
-      // }
-
-      // const brokenContainers = document.querySelectorAll('.partial-refresh');
-      // [...brokenContainers].forEach((brokenContainer) => {
-      //   brokenContainer.classList.remove('details-done');
-      //   let removeElements = brokenContainer.getElementsByClassName('js-removepartial');
-      //   while (removeElements[0]) {
-      //     removeElements[0].parentNode.removeChild(removeElements[0]);
-      //   }
-      // });
-
-      // mutationObserver.observe(document, observerConfig);
     });
   });
 }
@@ -330,25 +302,28 @@ function getLang(lang) {
   return i18n.hasOwnProperty(lang) ? lang : 'en-us';
 }
 
-function buildStars(rating) {
-  let starTemplate = '';
-  let remainder = 0;
-  for (let i = 0; i < 5; i++) {
-    let percent = 0;
-    if (Math.floor(rating) > i) {
-      percent = 100;
-    } else if (remainder == 0) {
-      remainder = rating % 1;
-      percent = Math.round(remainder * 10) * 10
-    }
-    starTemplate += `
-      <div>
-        <span class="impr__star impr__star--unfilled"></span>
-        <span class="impr__star impr__star--filled" style="width: ${percent.toString()}%;"></span>
-      </div>
-    `;
-  }
-  return starTemplate;
+function buildSvgStars(courseId, rating) {
+  return (`
+<svg aria-hidden="true" viewBox="0 0 70 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="impr__svg-stars">
+  <mask id="mask-${courseId}" data-purpose="star-rating-mask">
+    <rect x="0" y="0" width="${rating * 20}%" height="100%" fill="white"></rect>
+  </mask>
+  <g fill="#e59819" mask="url(#mask-${courseId})" data-purpose="star-filled">
+    <use xlink:href="#icon-rating-star" width="14" height="14" x="0"></use>
+    <use xlink:href="#icon-rating-star" width="14" height="14" x="14"></use>
+    <use xlink:href="#icon-rating-star" width="14" height="14" x="28"></use>
+    <use xlink:href="#icon-rating-star" width="14" height="14" x="42"></use>
+    <use xlink:href="#icon-rating-star" width="14" height="14" x="56"></use>
+  </g>
+  <g fill="transparent" stroke="#e59819" stroke-width="2" data-purpose="star-bordered">
+    <use xlink:href="#icon-rating-star" width="12" height="12" x="1" y="1"></use>
+    <use xlink:href="#icon-rating-star" width="12" height="12" x="15" y="1"></use>
+    <use xlink:href="#icon-rating-star" width="12" height="12" x="29" y="1"></use>
+    <use xlink:href="#icon-rating-star" width="12" height="12" x="43" y="1"></use>
+    <use xlink:href="#icon-rating-star" width="12" height="12" x="57" y="1"></use>
+  </g>
+</svg>
+  `);
 }
 
 function parseRuntime(seconds, lang) {
@@ -448,8 +423,8 @@ style.textContent = `
   background-color: #f7f9fa;
 }
 
-.improved-course-card--image-wrapper {
-  border-width: 0;
+.improved-course-card--container .improved-course-card--image-wrapper {
+  border-width: 0 0 1px 0;
 }
 
 .improved-course-card--main-content {
@@ -543,14 +518,28 @@ span[class^='leave-rating--helper-text'] {
 
 .improved-course-card--additional-details {
   width: 100%;
-  font-size: 12px;
+  font-size: 1.2rem;
   color: #464b53;
-  height: 85px;
+  height: 82px;
+}
+
+.impr__rating .impr__rating-number {
+  margin-left: 0.4rem;
+  font-size: 1.3rem;
+  color: #505763;
+}
+
+.impr__rating-count {
+  color: #6a6f73;
+  margin-left: 0.4rem;
 }
 
 .impr__rating {
-  padding: 0 6px;
-  height: 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0 6px 6px;
+  height: 42px;
 }
 
 .impr__rating-strip {
@@ -559,13 +548,18 @@ span[class^='leave-rating--helper-text'] {
 
 .impr__stats {
   font-weight: 500;
-  padding: 5px 12px;
+  padding: 6px;
   line-height: 1.7;
   display: flex;
 }
 
-.impr__stats > div {
-  display: inline-block;
+.impr__badge {
+  display: inline-flex;
+  position: relative;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
   background: #f7f8fa;
   padding: 0 5px;
   margin-right: 5px;
@@ -574,50 +568,16 @@ span[class^='leave-rating--helper-text'] {
   cursor: default;
 }
 
-.impr__stats .udi {
+.impr__badge .ud-icon {
+  width: 1.4rem;
+  height: 1.4rem;
   opacity: 0.75;
-  vertical-align: middle;
 }
 
-.impr__stats .udi:not(:last-child) {
-  margin-right: 4px;
-}
-
-.impr__star-own {
-  font-size: 16px;
-  margin-right: 2px;
-}
-
-.card__stars {
-  display: inline-block;
+.impr__svg-stars {
+  display: block;
   width: 7rem;
   height: 1.6rem;
-  vertical-align: text-bottom;
-}
-
-.card__star--bordered {
-  stroke: #eb8a2f;
-}
-
-.card__star--filled {
-  fill: #eb8a2f;
-}
-
-.card__rating-text {
-  font-weight: 700;
-  color: #505763;
-  margin-left: 2px;
-  margin-right: 6px;
-  font-size: 14px;
-}
-
-.impr__icon {
-  width: 12px;
-  height: 15px;
-  fill: currentColor;
-  vertical-align: text-top;
-  margin-right: 4px;
-  opacity: 0.75;
 }
 
 .card__nodata {
@@ -633,47 +593,15 @@ span[class^='leave-rating--helper-text'] {
   color: #521822;
 }
 
-.impr__rating-all {
-  height: 20px;
-}
-
-.impr__rating-btn {
-  position: relative;
-  height: 20px;
-  flex-direction: row !important;
-  align-items: center !important;
-  justify-content: flex-end;
-}
-
-.impr__rating-btn > .impr__rating-own {
-  position: absolute;
-}
-
-.impr__rating-btn.is-rated > span {
-  opacity: 0;
-}
-
-.impr__rating-btn.is-rated:hover > span {
-  opacity: 1;
-}
-
-.impr__rating-btn.is-rated:hover > .impr__rating-own {
-  opacity: 0;
-}
-
-.impr__tooltip {
-  display: inline;
-  position: relative;
-}
-
-.impr__tooltip:hover:after {
+.impr__badge:hover:after {
   display: flex;
   justify-content: center;
   background: #4f5662;
   border-radius: 3px;
   color: #fff;
   content: attr(data-tooltip);
-  margin: 4px 0 0 -50%;
+  bottom: 24px;
+  margin: 0;
   font-size: 11px;
   padding: 2px 6px;
   position: absolute;
@@ -681,83 +609,25 @@ span[class^='leave-rating--helper-text'] {
   white-space: pre;
 }
 
-.impr__tooltip:hover:before {
+.impr__badge:hover:before {
   border: solid;
   border-color: #4f5662 transparent;
-  border-width: 0px 4px 6px 4px;
   content: '';
   left: 50%;
   margin-left: -4px;
-  bottom: -4px;
   position: absolute;
+  top: -4px;
+  border-width: 6px 4px 0;
 }
 
-.impr__stars-ct {
+.impr__rating-row {
   margin: 0;
-  padding: 4px 0 0;
+  padding: 0;
   display: flex;
 }
 
-.impr__stars {
-  font-size: 13px;
-  display: inline-block;
-  white-space: nowrap;
-}
-
-.impr__stars div {
-  display: inline-block;
-  position: relative;
-}
-
-.impr__star {
-  top: 0;
-  left: 0;
-}
-
-.impr__star:before {
-  font-family: udemyicons;
-  display: inline-block;
-  position: relative;
-  line-height: 1;
-}
-
-.impr__star--unfilled {
-  position: relative;
-}
-
-.impr__star--unfilled:before {
-  z-index: 0;
-  content: '\\F005';
-  color: #dedfe0;
-}
-
-.impr__star--filled {
-  position: absolute;
-  overflow: hidden;
-}
-
-.impr__star--filled:before {
-  z-index: 1;
-  content: '\\F005';
-  color: #f4c150;
-}
-
-.impr__review {
-  margin-left: 5px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.impr__review-stat {
-  font-weight: 700;
-  font-size: 13px;
-  color: #505763;
-}
-
-.impr__review-count {
-  font-weight: 400;
-  color: #686f7a;
-  margin-left: 2px;
+.impr__star-wrapper {
+  display: inline-flex;
+  align-items: center;
 }`;
 document.documentElement.appendChild(style);
