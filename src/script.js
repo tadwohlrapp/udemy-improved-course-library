@@ -27,7 +27,7 @@ function fetchCourses() {
     innerContainer.appendChild(courseCustomDiv);
 
     courseContainer.classList.add('details-done');
-    courseContainer.classList.add('improved-course-card--container');    
+    courseContainer.classList.add('improved-course-card--container');
     courseContainer.classList.remove('partial-refresh');
 
     // Add Link to course overview to options dropdown
@@ -49,26 +49,26 @@ function fetchCourses() {
       allDropdowns[1].appendChild(courseLinkLi);;
     }
 
-// Find existing elements in DOM
-const imageWrapper = courseContainer.querySelector('div[class^="course-card--image-wrapper--"]');
-imageWrapper.classList.add('improved-course-card--image-wrapper')
+    // Find existing elements in DOM
+    const imageWrapper = courseContainer.querySelector('div[class^="course-card--image-wrapper--"]');
+    imageWrapper.classList.add('improved-course-card--image-wrapper')
 
-const mainContent = courseContainer.querySelector('div[class^="course-card--main-content--"]');
-mainContent.classList.add('improved-course-card--main-content')
+    const mainContent = courseContainer.querySelector('div[class^="course-card--main-content--"]');
+    mainContent.classList.add('improved-course-card--main-content')
 
-const courseTitle = courseContainer.querySelector('h3[data-purpose="course-title-url"]');
-courseTitle.classList.add('improved-course-card--course-title');
+    const courseTitle = courseContainer.querySelector('h3[data-purpose="course-title-url"]');
+    courseTitle.classList.add('improved-course-card--course-title');
 
-const progressBar = courseContainer.querySelector('div[class^="enrolled-course-card--meter--"]');
-progressBar?.classList.add('improved-course-card--meter')
+    const progressBar = courseContainer.querySelector('div[class^="enrolled-course-card--meter--"]');
+    progressBar?.classList.add('improved-course-card--meter')
 
-const progressAndRating = courseContainer.querySelector('div[class*="enrolled-course-card--progress-and-rating--"]');
-progressAndRating?.classList.add('improved-course-card--progress-and-rating')
+    const progressAndRating = courseContainer.querySelector('div[class*="enrolled-course-card--progress-and-rating--"]');
+    progressAndRating?.classList.add('improved-course-card--progress-and-rating')
 
-const progressText = progressAndRating.firstChild;
-const progressMade = /%/.test(progressText.textContent);
+    const progressText = progressAndRating.firstChild;
+    const progressMade = /%/.test(progressText.textContent);
 
-if (!progressMade) progressAndRating.parentNode.removeChild(progressAndRating);
+    if (!progressMade) progressAndRating.parentNode.removeChild(progressAndRating);
 
     // If progress made
     if (progressMade) {
@@ -93,9 +93,6 @@ if (!progressMade) progressAndRating.parentNode.removeChild(progressAndRating);
 
     // If course page has draft status, do not even to fetch its data via API
     if (courseContainer.querySelector('[data-purpose="course-title-url"] a').href.includes('/draft/')) {
-      // if (!isPartialRefresh) {
-      //   mainContent.parentNode.removeChild(mainContent);
-      // }
       courseContainer.querySelector('.card__course-link').style.textDecoration = "line-through";
       courseCustomDiv.classList.add('card__nodata');
       courseCustomDiv.innerHTML += i18n[lang].notavailable;
@@ -143,8 +140,10 @@ if (!progressMade) progressAndRating.parentNode.removeChild(progressAndRating);
         if (hasCaptions) {
           const captionsString = captionsLangs.join('&#013;&#010;');
           captionsTag = `
-            <div class="impr__tooltip" data-tooltip="${captionsString}">
-              <i class="udi udi-closed-caption"></i>
+            <div class="impr__badge" data-tooltip="${captionsString}">
+              <svg aria-hidden="true" focusable="false" class="ud-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M21 4H3v16h18V4zm-10 7H9.5v-.5h-2v3h2V13H11v2H6V9h5v2zm7 0h-1.5v-.5h-2v3h2V13H18v2h-5V9h5v2z"/>
+              </svg>
             </div>
           `;
         }
@@ -173,15 +172,14 @@ if (!progressMade) progressAndRating.parentNode.removeChild(progressAndRating);
 
           // Build the html
           myRatingHtml = `
-            <span class="impr__stars-ct">
-              <span class="impr__stars">
-                ${buildStars(ratingOwn)}
+            <div class="impr__rating-row">
+              <span class="impr__star-wrapper">
+                <span class="ud-sr-only">Rating: ${ratingOwn} out of 5</span>
+                ${buildSvgStars(courseId.toString() + '-own', ratingOwn)}
+                <span class="ud-heading-sm impr__rating-number">${setDecimal(ratingOwn, lang)}</span>
               </span>
-              <span class="impr__review">
-                <span class="impr__review-stat">${setDecimal(ratingOwn, lang)}</span>
-                <span class="impr__review-count">(<span class="review-button"></span>)</span>
-              </span>
-            </span>
+              <span class="ud-text-xs impr__rating-count">(<span class="review-button"></span>)</span>
+            </div>
           `;
         }
 
@@ -190,29 +188,32 @@ if (!progressMade) progressAndRating.parentNode.removeChild(progressAndRating);
         let updateDateInfo = '';
         if (updateDateShort !== '' && updateDateLong !== '') {
           updateDateInfo = `
-            <div class="impr__tooltip" data-tooltip="${i18n[lang].updated}${updateDateLong}">
-              <i class="udi udi-resend"></i><span>${updateDateShort}</span>
+            <div class="impr__badge" data-tooltip="${i18n[lang].updated}${updateDateLong}">
+              <svg aria-hidden="true" focusable="false" class="ud-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M11 8v5l4.3 2.5.7-1.3-3.5-2V8H11zm10 2V3l-2.6 2.6A9 9 0 1 0 21 12h-2a7 7 0 1 1-2-5l-3 3h7z"/>
+              </svg><span>${updateDateShort}</span>
             </div>
           `;
         }
 
         courseCustomDiv.innerHTML = `
           <div class="impr__rating">
-            <span class="impr__stars-ct">
-              <span class="impr__stars">
-                ${buildStars(rating)}
+            <div class="impr__rating-row">
+              <span class="impr__star-wrapper">
+                <span class="ud-sr-only">Rating: ${rating} out of 5</span>
+                ${buildSvgStars(courseId, rating)}
+                <span class="ud-heading-sm impr__rating-number">${setDecimal(rating, lang)}</span>
               </span>
-              <span class="impr__review">
-                <span class="impr__review-stat">${setDecimal(rating, lang)}</span>
-                <span class="impr__review-count">(${setSeparator(reviews, lang)})</span>
-              </span>
-            </span>
+              <span class="ud-text-xs impr__rating-count">(${setSeparator(reviews, lang)})</span>
+            </div>
             ${myRatingHtml}
           </div>
           <div class="impr__rating-strip" style="background-color:${getColor(colorValue(ratingStripColor))}"></div>
           <div class="impr__stats">
-            <div class="impr__tooltip" data-tooltip="${setSeparator(enrolled, lang)} ${i18n[lang].enrolled}">
-              <i class="udi udi-users"></i><span>${setSeparator(enrolled, lang)}</span>
+            <div class="impr__badge" data-tooltip="${setSeparator(enrolled, lang)} ${i18n[lang].enrolled}">
+              <svg aria-hidden="true" focusable="false" class="ud-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M16 11c1.7 0 3-1.3 3-3s-1.3-3-3-3-3 1.3-3 3 1.3 3 3 3zm-8 0c1.7 0 3-1.3 3-3S9.7 5 8 5 5 6.3 5 8s1.3 3 3 3zm0 2c-2.3 0-7 1.2-7 3.5V19h14v-2.5c0-2.3-4.7-3.5-7-3.5zm8 0h-1c1.2.9 2 2 2 3.5V19h6v-2.5c0-2.3-4.7-3.5-7-3.5z"/>
+              </svg><span>${setSeparator(enrolled, lang)}</span>
             </div>
             ${updateDateInfo}
             ${captionsTag}
@@ -224,10 +225,6 @@ if (!progressMade) progressAndRating.parentNode.removeChild(progressAndRating);
           ratingButton.style.display = 'inline';
           reviewButtonContainer.appendChild(ratingButton);
         }
-
-        // if (!isPartialRefresh) {
-        //   mainContent.parentNode.removeChild(mainContent);
-        // }
 
         // Hide language badge if language is English
         if (localeCode.slice(0, 2) !== 'en') {
@@ -246,9 +243,6 @@ if (!progressMade) progressAndRating.parentNode.removeChild(progressAndRating);
       .catch(error => {
         courseCustomDiv.classList.add('card__nodata');
         courseCustomDiv.innerHTML += `<div><b>${error}</b><br>${i18n[lang].notavailable}</div>`;
-        // if (mainContent != null) {
-        //   mainContent.parentNode.removeChild(mainContent);
-        // }
       });
   });
 }
@@ -263,28 +257,6 @@ function listenForArchiveToggle() {
         location.reload();
       }, 500)
 
-
-      // mutationObserver.disconnect();
-      // let thisCourse = item.closest('.details-done');
-      // if (thisCourse != null) {
-      //   thisCourse.classList.add('partial-refresh');
-
-      //   while (thisCourse.nextElementSibling != null) {
-      //     thisCourse.nextElementSibling.classList.add('partial-refresh');
-      //     thisCourse = thisCourse.nextElementSibling;
-      //   }
-      // }
-
-      // const brokenContainers = document.querySelectorAll('.partial-refresh');
-      // [...brokenContainers].forEach((brokenContainer) => {
-      //   brokenContainer.classList.remove('details-done');
-      //   let removeElements = brokenContainer.getElementsByClassName('js-removepartial');
-      //   while (removeElements[0]) {
-      //     removeElements[0].parentNode.removeChild(removeElements[0]);
-      //   }
-      // });
-
-      // mutationObserver.observe(document, observerConfig);
     });
   });
 }
@@ -301,25 +273,28 @@ function getLang(lang) {
   return i18n.hasOwnProperty(lang) ? lang : 'en-us';
 }
 
-function buildStars(rating) {
-  let starTemplate = '';
-  let remainder = 0;
-  for (let i = 0; i < 5; i++) {
-    let percent = 0;
-    if (Math.floor(rating) > i) {
-      percent = 100;
-    } else if (remainder == 0) {
-      remainder = rating % 1;
-      percent = Math.round(remainder * 10) * 10
-    }
-    starTemplate += `
-      <div>
-        <span class="impr__star impr__star--unfilled"></span>
-        <span class="impr__star impr__star--filled" style="width: ${percent.toString()}%;"></span>
-      </div>
-    `;
-  }
-  return starTemplate;
+function buildSvgStars(courseId, rating) {
+  return (`
+<svg aria-hidden="true" viewBox="0 0 70 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="impr__svg-stars">
+  <mask id="mask-${courseId}" data-purpose="star-rating-mask">
+    <rect x="0" y="0" width="${rating * 20}%" height="100%" fill="white"></rect>
+  </mask>
+  <g fill="#e59819" mask="url(#mask-${courseId})" data-purpose="star-filled">
+    <use xlink:href="#icon-rating-star" width="14" height="14" x="0"></use>
+    <use xlink:href="#icon-rating-star" width="14" height="14" x="14"></use>
+    <use xlink:href="#icon-rating-star" width="14" height="14" x="28"></use>
+    <use xlink:href="#icon-rating-star" width="14" height="14" x="42"></use>
+    <use xlink:href="#icon-rating-star" width="14" height="14" x="56"></use>
+  </g>
+  <g fill="transparent" stroke="#e59819" stroke-width="2" data-purpose="star-bordered">
+    <use xlink:href="#icon-rating-star" width="12" height="12" x="1" y="1"></use>
+    <use xlink:href="#icon-rating-star" width="12" height="12" x="15" y="1"></use>
+    <use xlink:href="#icon-rating-star" width="12" height="12" x="29" y="1"></use>
+    <use xlink:href="#icon-rating-star" width="12" height="12" x="43" y="1"></use>
+    <use xlink:href="#icon-rating-star" width="12" height="12" x="57" y="1"></use>
+  </g>
+</svg>
+  `);
 }
 
 function parseRuntime(seconds, lang) {

@@ -6,8 +6,8 @@
   background-color: #f7f9fa;
 }
 
-.improved-course-card--image-wrapper {
-  border-width: 0;
+.improved-course-card--container .improved-course-card--image-wrapper {
+  border-width: 0 0 1px 0;
 }
 
 .improved-course-card--main-content {
@@ -101,14 +101,28 @@ span[class^='leave-rating--helper-text'] {
 
 .improved-course-card--additional-details {
   width: 100%;
-  font-size: 12px;
+  font-size: 1.2rem;
   color: #464b53;
-  height: 85px;
+  height: 82px;
+}
+
+.impr__rating .impr__rating-number {
+  margin-left: 0.4rem;
+  font-size: 1.3rem;
+  color: #505763;
+}
+
+.impr__rating-count {
+  color: #6a6f73;
+  margin-left: 0.4rem;
 }
 
 .impr__rating {
-  padding: 0 6px;
-  height: 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0 6px 6px;
+  height: 42px;
 }
 
 .impr__rating-strip {
@@ -117,13 +131,18 @@ span[class^='leave-rating--helper-text'] {
 
 .impr__stats {
   font-weight: 500;
-  padding: 5px 12px;
+  padding: 6px;
   line-height: 1.7;
   display: flex;
 }
 
-.impr__stats > div {
-  display: inline-block;
+.impr__badge {
+  display: inline-flex;
+  position: relative;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
   background: #f7f8fa;
   padding: 0 5px;
   margin-right: 5px;
@@ -132,50 +151,16 @@ span[class^='leave-rating--helper-text'] {
   cursor: default;
 }
 
-.impr__stats .udi {
+.impr__badge .ud-icon {
+  width: 1.4rem;
+  height: 1.4rem;
   opacity: 0.75;
-  vertical-align: middle;
 }
 
-.impr__stats .udi:not(:last-child) {
-  margin-right: 4px;
-}
-
-.impr__star-own {
-  font-size: 16px;
-  margin-right: 2px;
-}
-
-.card__stars {
-  display: inline-block;
+.impr__svg-stars {
+  display: block;
   width: 7rem;
   height: 1.6rem;
-  vertical-align: text-bottom;
-}
-
-.card__star--bordered {
-  stroke: #eb8a2f;
-}
-
-.card__star--filled {
-  fill: #eb8a2f;
-}
-
-.card__rating-text {
-  font-weight: 700;
-  color: #505763;
-  margin-left: 2px;
-  margin-right: 6px;
-  font-size: 14px;
-}
-
-.impr__icon {
-  width: 12px;
-  height: 15px;
-  fill: currentColor;
-  vertical-align: text-top;
-  margin-right: 4px;
-  opacity: 0.75;
 }
 
 .card__nodata {
@@ -191,47 +176,15 @@ span[class^='leave-rating--helper-text'] {
   color: #521822;
 }
 
-.impr__rating-all {
-  height: 20px;
-}
-
-.impr__rating-btn {
-  position: relative;
-  height: 20px;
-  flex-direction: row !important;
-  align-items: center !important;
-  justify-content: flex-end;
-}
-
-.impr__rating-btn > .impr__rating-own {
-  position: absolute;
-}
-
-.impr__rating-btn.is-rated > span {
-  opacity: 0;
-}
-
-.impr__rating-btn.is-rated:hover > span {
-  opacity: 1;
-}
-
-.impr__rating-btn.is-rated:hover > .impr__rating-own {
-  opacity: 0;
-}
-
-.impr__tooltip {
-  display: inline;
-  position: relative;
-}
-
-.impr__tooltip:hover:after {
+.impr__badge:hover:after {
   display: flex;
   justify-content: center;
   background: #4f5662;
   border-radius: 3px;
   color: #fff;
   content: attr(data-tooltip);
-  margin: 4px 0 0 -50%;
+  bottom: 24px;
+  margin: 0;
   font-size: 11px;
   padding: 2px 6px;
   position: absolute;
@@ -239,82 +192,24 @@ span[class^='leave-rating--helper-text'] {
   white-space: pre;
 }
 
-.impr__tooltip:hover:before {
+.impr__badge:hover:before {
   border: solid;
   border-color: #4f5662 transparent;
-  border-width: 0px 4px 6px 4px;
   content: '';
   left: 50%;
   margin-left: -4px;
-  bottom: -4px;
   position: absolute;
+  top: -4px;
+  border-width: 6px 4px 0;
 }
 
-.impr__stars-ct {
+.impr__rating-row {
   margin: 0;
-  padding: 4px 0 0;
+  padding: 0;
   display: flex;
 }
 
-.impr__stars {
-  font-size: 13px;
-  display: inline-block;
-  white-space: nowrap;
-}
-
-.impr__stars div {
-  display: inline-block;
-  position: relative;
-}
-
-.impr__star {
-  top: 0;
-  left: 0;
-}
-
-.impr__star:before {
-  font-family: udemyicons;
-  display: inline-block;
-  position: relative;
-  line-height: 1;
-}
-
-.impr__star--unfilled {
-  position: relative;
-}
-
-.impr__star--unfilled:before {
-  z-index: 0;
-  content: '\F005';
-  color: #dedfe0;
-}
-
-.impr__star--filled {
-  position: absolute;
-  overflow: hidden;
-}
-
-.impr__star--filled:before {
-  z-index: 1;
-  content: '\F005';
-  color: #f4c150;
-}
-
-.impr__review {
-  margin-left: 5px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.impr__review-stat {
-  font-weight: 700;
-  font-size: 13px;
-  color: #505763;
-}
-
-.impr__review-count {
-  font-weight: 400;
-  color: #686f7a;
-  margin-left: 2px;
+.impr__star-wrapper {
+  display: inline-flex;
+  align-items: center;
 }
