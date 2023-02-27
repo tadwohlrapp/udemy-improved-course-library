@@ -1,0 +1,28 @@
+This extension adds additional course information to the courses in your Udemy library.
+It uses the Udemy API to retrieve additional information about the courses in your library and adds the following elements to each course:
+
+•  The total runtime
+•  The rating
+•  The total number of ratings
+•  The number of enrolled students
+•  The date of the last update
+•  Info about available subtitles
+
+Additionally it displays a thin colored strip at the bottom of the course card, from red (3.5 stars and below) to green (5 stars).
+
+This should give you a good idea of which course is worthwhile and which you might want to archive instead.
+
+Note: If a course has stopped enrollment and is no longer publicly visible, no stats are available for that course.
+
+If you like the extension, I'd appreciate a review!
+★★★★★
+
+Thanks,
+Tad
+
+====================================
+
+This extension is open-source:
+https://github.com/tadwohlrapp/udemy-improved-course-library
+
+Udemy is a trademark of Udemy, Inc. This browser extension is not a product of Udemy, Inc. and is not affiliated with Udemy, Inc. in any way.

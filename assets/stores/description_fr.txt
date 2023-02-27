@@ -1,0 +1,28 @@
+Cette extension ajoute des informations supplémentaires sur les cours de ta bibliothèque Udemy.
+Elle utilise l'API Udemy pour obtenir des informations supplémentaires sur les cours de ta bibliothèque et ajoute les éléments suivants à chaque cours :
+
+•  La durée totale
+•  L'évaluation
+•  Le nombre total d'évaluations
+•  Le nombre de participants inscrits
+•  La date de la dernière mise à jour
+•  Des infos sur les sous-titres disponibles
+
+De plus, une fine bande colorée est affichée en bas de la carte du cours, du rouge (3,5 étoiles et en dessous) au vert (5 étoiles).
+
+Cela devrait te donner un bon aperçu du cours qui vaut la peine d'être suivi et de celui qu'il vaut peut-être mieux archiver à la place.
+
+Remarque : si un cours a cessé de s'inscrire et n'est plus visible au public, aucune statistique n'est disponible pour ce cours.
+
+Si tu apprécies cette extension, je serais heureux de recevoir une évaluation !
+★★★★★
+
+Merci beaucoup !
+Tad
+
+====================================
+
+Cette extension est open-source :
+https://github.com/tadwohlrapp/udemy-improved-course-library
+
+Udemy est une marque de Udemy, Inc. Cette extension de navigateur n'est pas un produit de Udemy, Inc. et n'a aucun lien commercial avec Udemy, Inc.

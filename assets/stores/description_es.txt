@@ -1,0 +1,28 @@
+Esta extensión añade información adicional a los cursos de tu biblioteca Udemy.
+Utiliza la API de Udemy para recuperar información adicional sobre los cursos de tu biblioteca y añade los siguientes elementos a cada curso:
+
+•  La duración total
+•  La calificación
+•  El número total de valoraciones
+•  El número de participantes inscritos
+•  La fecha de la última actualización
+•  Información sobre los subtítulos disponibles
+
+Además, aparecerá una fina franja de color en la parte inferior del mapa del curso, que va del rojo (3,5 estrellas o menos) al verde (5 estrellas).
+
+Esto debería darle una buena idea de qué curso merece la pena y cuál podría archivar en su lugar.
+
+Nota: Si un curso ha dejado de matricularse y ya no es visible públicamente, no hay estadísticas disponibles para ese curso.
+
+Si le gusta la extensión, ¡me encantaría recibir una valoración!
+★★★★★
+
+Muchas gracias,
+Tad
+
+====================================
+
+Esta extensión es de código abierto:
+https://github.com/tadwohlrapp/udemy-improved-course-library
+
+Udemy es una marca comercial de Udemy, Inc. Esta extensión del navegador no es un producto de Udemy, Inc. y no está afiliada comercialmente a Udemy, Inc.

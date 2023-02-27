@@ -1,0 +1,28 @@
+Diese Erweiterung fügt zusätzliche Kursinformationen zu den Kursen in deiner Udemy-Bibliothek hinzu.
+Sie nutzt die Udemy API, um zusätzliche Informationen über die Kurse in deiner Bibliothek abzurufen und fügt die folgenden Elemente zu jedem Kurs hinzu:
+
+•  Die Gesamtlaufzeit
+•  Die Bewertung
+•  Die Gesamtanzahl der Bewertungen
+•  Die Anzahl der eingeschriebenen Teilnehmer
+•  Das Datum der letzten Aktualisierung
+•  Infos zu verfügbaren Untertiteln
+
+Zusätzlich wird ein dünner farbiger Streifen am unteren Rand der Kurskarte angezeigt, von rot (3,5 Sterne und darunter) bis grün (5 Sterne).
+
+Das sollte dir einen guten Überblick verschaffen, welcher Kurs lohnenswert wert ist und welchen du stattdessen vielleicht lieber archivieren solltest.
+
+Hinweis: Wenn ein Kurs die Einschreibung eingestellt hat und nicht mehr öffentlich sichtbar ist, sind keine Statistiken für diesen Kurs verfügbar.
+
+Wenn dir die Erweiterung gefällt, würde ich mich über eine Bewertung freuen!
+★★★★★
+
+Vielen Dank,
+Tad
+
+====================================
+
+Diese Erweiterung ist open-source:
+https://github.com/tadwohlrapp/udemy-improved-course-library
+
+Udemy ist eine Marke von Udemy, Inc. Diese Browsererweiterung ist kein Produkt von Udemy, Inc. und steht in keinem geschäftlichen Zusammenhang zu Udemy, Inc.
