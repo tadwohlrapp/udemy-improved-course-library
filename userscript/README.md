@@ -17,7 +17,7 @@ This should give you a good idea of which course is worthwhile and which you mig
 
 Note: If a course has stopped enrollment and is no longer publicly visible, no stats are available for that course.
 
-![screenshot](https://github.com/tadwohlrapp/udemy-improved-course-library/blob/main/assets/screenshot.png)
+![screenshot](https://raw.githubusercontent.com/tadwohlrapp/udemy-improved-course-library/main/assets/screenshot.png)
 
 ## Installation
 
