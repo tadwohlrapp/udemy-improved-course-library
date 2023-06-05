@@ -23,4 +23,5 @@ Note: If a course has stopped enrollment and is no longer publicly visible, no s
 
 - [Install from Chrome Web Store](https://chrome.google.com/webstore/detail/udemy-improved-course-lib/dmlfcanjgejpgjajoiepgfglmjcnhhlh)
 - [Install from Firefox Add-ons](https://addons.mozilla.org/addon/udemy-improved-course-library)
+- [Install from Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/obecdhpagmbihmpojcafgflffhjhnicg)
 - [Install as userscript](https://greasyfork.org/en/scripts/402838-udemy-improved-course-library)
