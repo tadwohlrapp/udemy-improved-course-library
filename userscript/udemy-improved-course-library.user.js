@@ -13,7 +13,7 @@
 // @description:ja  Udemyのライブラリにある全てのコースに現在の評価やその他の詳細情報を追加します。
 // @namespace       https://github.com/tadwohlrapp
 // @author          Tad Wohlrapp
-// @version         1.1.0
+// @version         1.1.1
 // @license         MIT
 // @homepageURL     https://github.com/tadwohlrapp/udemy-improved-course-library
 // @supportURL      https://github.com/tadwohlrapp/udemy-improved-course-library/issues
@@ -23,8 +23,8 @@
 // @icon64          https://github.com/tadwohlrapp/udemy-improved-course-library/raw/main/src/icon64.png
 // @run-at          document-end
 // @match           https://www.udemy.com/home/my-courses/*
-// @compatible      firefox Tested on Firefox v110.0 with Violentmonkey v2.13.11 and Tampermonkey v4.18.1
-// @compatible      chrome Tested on Chrome v110.0 with Violentmonkey v2.14.0 and Tampermonkey v4.18.1
+// @compatible      firefox Tested on Firefox v114.0 with Violentmonkey v2.14.0 and Tampermonkey v4.18.1
+// @compatible      chrome Tested on Chrome v114.0 with Violentmonkey v2.14.0 and Tampermonkey v4.18.1
 // ==/UserScript==
 
 fetchCourses();
@@ -75,24 +75,30 @@ function fetchCourses() {
 
     const allDropdowns = courseContainer.parentElement.querySelectorAll('.udlite-block-list');
     if (allDropdowns[1]) {
-      allDropdowns[1].appendChild(courseLinkLi);;
+      allDropdowns[1].appendChild(courseLinkLi);
     }
 
     // Find existing elements in DOM
-    const imageWrapper = courseContainer.querySelector('div[class^="course-card--image-wrapper--"]');
-    imageWrapper.classList.add('improved-course-card--image-wrapper')
+    const imageWrapper = courseContainer.querySelector('div[class^="course-card-module--image-wrapper--"]');
+    imageWrapper.classList.add('improved-course-card--image-wrapper');
 
-    const mainContent = courseContainer.querySelector('div[class^="course-card--main-content--"]');
-    mainContent.classList.add('improved-course-card--main-content')
+    const mainContent = courseContainer.querySelector('div[class^="course-card-module--main-content--"]');
+    mainContent.classList.add('improved-course-card--main-content');
 
     const courseTitle = courseContainer.querySelector('h3[data-purpose="course-title-url"]');
     courseTitle.classList.add('improved-course-card--course-title');
 
+    const priceTextContainer = courseContainer.querySelector('div[class^="course-card-module--price-text-container--"]');
+    if (priceTextContainer) priceTextContainer.parentNode.removeChild(priceTextContainer);
+
+    const courseBadges = courseContainer.querySelector('div[class^="course-card-module--course-badges--"]');
+    if (courseBadges) courseBadges.parentNode.removeChild(courseBadges);
+
     const progressBar = courseContainer.querySelector('div[class^="enrolled-course-card--meter--"]');
-    progressBar?.classList.add('improved-course-card--meter')
+    progressBar?.classList.add('improved-course-card--meter');
 
     const progressAndRating = courseContainer.querySelector('div[class*="enrolled-course-card--progress-and-rating--"]');
-    progressAndRating?.classList.add('improved-course-card--progress-and-rating')
+    progressAndRating?.classList.add('improved-course-card--progress-and-rating');
 
     const progressText = progressAndRating.firstChild;
     const progressMade = /%/.test(progressText.textContent);

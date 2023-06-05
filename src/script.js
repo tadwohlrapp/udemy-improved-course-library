@@ -46,24 +46,30 @@ function fetchCourses() {
 
     const allDropdowns = courseContainer.parentElement.querySelectorAll('.udlite-block-list');
     if (allDropdowns[1]) {
-      allDropdowns[1].appendChild(courseLinkLi);;
+      allDropdowns[1].appendChild(courseLinkLi);
     }
 
     // Find existing elements in DOM
-    const imageWrapper = courseContainer.querySelector('div[class^="course-card--image-wrapper--"]');
-    imageWrapper.classList.add('improved-course-card--image-wrapper')
+    const imageWrapper = courseContainer.querySelector('div[class^="course-card-module--image-wrapper--"]');
+    imageWrapper.classList.add('improved-course-card--image-wrapper');
 
-    const mainContent = courseContainer.querySelector('div[class^="course-card--main-content--"]');
-    mainContent.classList.add('improved-course-card--main-content')
+    const mainContent = courseContainer.querySelector('div[class^="course-card-module--main-content--"]');
+    mainContent.classList.add('improved-course-card--main-content');
 
     const courseTitle = courseContainer.querySelector('h3[data-purpose="course-title-url"]');
     courseTitle.classList.add('improved-course-card--course-title');
 
+    const priceTextContainer = courseContainer.querySelector('div[class^="course-card-module--price-text-container--"]');
+    if (priceTextContainer) priceTextContainer.parentNode.removeChild(priceTextContainer);
+
+    const courseBadges = courseContainer.querySelector('div[class^="course-card-module--course-badges--"]');
+    if (courseBadges) courseBadges.parentNode.removeChild(courseBadges);
+
     const progressBar = courseContainer.querySelector('div[class^="enrolled-course-card--meter--"]');
-    progressBar?.classList.add('improved-course-card--meter')
+    progressBar?.classList.add('improved-course-card--meter');
 
     const progressAndRating = courseContainer.querySelector('div[class*="enrolled-course-card--progress-and-rating--"]');
-    progressAndRating?.classList.add('improved-course-card--progress-and-rating')
+    progressAndRating?.classList.add('improved-course-card--progress-and-rating');
 
     const progressText = progressAndRating.firstChild;
     const progressMade = /%/.test(progressText.textContent);
