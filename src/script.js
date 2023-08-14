@@ -50,8 +50,8 @@ function fetchCourses() {
     }
 
     // Find existing elements in DOM
-    const imageWrapper = courseContainer.querySelector('div[class^="course-card-module--image-wrapper--"]');
-    imageWrapper.classList.add('improved-course-card--image-wrapper');
+    const imageWrapper = courseContainer.querySelector('div[class^="course-card-module--image-container--"]');
+    imageWrapper.classList.add('improved-course-card--image-container');
 
     const mainContent = courseContainer.querySelector('div[class^="course-card-module--main-content--"]');
     mainContent.classList.add('improved-course-card--main-content');
@@ -62,7 +62,7 @@ function fetchCourses() {
     const priceTextContainer = courseContainer.querySelector('div[class^="course-card-module--price-text-container--"]');
     if (priceTextContainer) priceTextContainer.parentNode.removeChild(priceTextContainer);
 
-    const courseBadges = courseContainer.querySelector('div[class^="course-card-module--course-badges--"]');
+    const courseBadges = courseContainer.querySelector('div[class^="course-card-module--badges-container--"]');
     if (courseBadges) courseBadges.parentNode.removeChild(courseBadges);
 
     const progressBar = courseContainer.querySelector('div[class^="enrolled-course-card--meter--"]');

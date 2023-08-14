@@ -13,7 +13,7 @@
 // @description:ja  Udemyのライブラリにある全てのコースに現在の評価やその他の詳細情報を追加します。
 // @namespace       https://github.com/tadwohlrapp
 // @author          Tad Wohlrapp
-// @version         1.1.1
+// @version         1.1.2
 // @license         MIT
 // @homepageURL     https://github.com/tadwohlrapp/udemy-improved-course-library
 // @supportURL      https://github.com/tadwohlrapp/udemy-improved-course-library/issues
@@ -23,8 +23,8 @@
 // @icon64          https://github.com/tadwohlrapp/udemy-improved-course-library/raw/main/src/icon64.png
 // @run-at          document-end
 // @match           https://www.udemy.com/home/my-courses/*
-// @compatible      firefox Tested on Firefox v114.0 with Violentmonkey v2.14.0 and Tampermonkey v4.18.1
-// @compatible      chrome Tested on Chrome v114.0 with Violentmonkey v2.14.0 and Tampermonkey v4.18.1
+// @compatible      firefox Tested on Firefox v117.0 with Violentmonkey v2.15.0 and Tampermonkey v4.19.0
+// @compatible      chrome Tested on Chrome v115.0 with Violentmonkey v2.15.0 and Tampermonkey v4.19.0
 // ==/UserScript==
 
 fetchCourses();
@@ -79,8 +79,8 @@ function fetchCourses() {
     }
 
     // Find existing elements in DOM
-    const imageWrapper = courseContainer.querySelector('div[class^="course-card-module--image-wrapper--"]');
-    imageWrapper.classList.add('improved-course-card--image-wrapper');
+    const imageWrapper = courseContainer.querySelector('div[class^="course-card-module--image-container--"]');
+    imageWrapper.classList.add('improved-course-card--image-container');
 
     const mainContent = courseContainer.querySelector('div[class^="course-card-module--main-content--"]');
     mainContent.classList.add('improved-course-card--main-content');
@@ -91,7 +91,7 @@ function fetchCourses() {
     const priceTextContainer = courseContainer.querySelector('div[class^="course-card-module--price-text-container--"]');
     if (priceTextContainer) priceTextContainer.parentNode.removeChild(priceTextContainer);
 
-    const courseBadges = courseContainer.querySelector('div[class^="course-card-module--course-badges--"]');
+    const courseBadges = courseContainer.querySelector('div[class^="course-card-module--badges-container--"]');
     if (courseBadges) courseBadges.parentNode.removeChild(courseBadges);
 
     const progressBar = courseContainer.querySelector('div[class^="enrolled-course-card--meter--"]');
@@ -425,7 +425,7 @@ style.textContent = `
   background-color: #f7f9fa;
 }
 
-.improved-course-card--container .improved-course-card--image-wrapper {
+.improved-course-card--container .improved-course-card--image-container {
   border-width: 0 0 1px 0;
 }
 
